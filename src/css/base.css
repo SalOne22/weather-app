@@ -10,6 +10,9 @@ body {
   background-color: var(--dark-color);
   color: var(--light-color);
   font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
 }
 
 .container {
