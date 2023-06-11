@@ -38,7 +38,7 @@
     color: var(--light-color);
     border-radius: 6px;
     padding: 6px 16px;
-    transition: box-shadow 200ms ease;
+    transition: box-shadow var(--transition-time) var(--transition-ease-in);
     max-width: 100%;
 
     @media screen and (min-width: 1200px) {

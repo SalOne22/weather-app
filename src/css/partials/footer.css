@@ -13,22 +13,15 @@
   }
 
   & .footer__link {
-    background-image: linear-gradient(
-      225deg,
-      hsl(277, 79%, 84%) 0%,
-      hsl(235, 84%, 85%) 13%,
-      hsl(219, 89%, 83%) 49%,
-      hsl(214, 92%, 81%) 76%,
-      hsl(215, 89%, 81%) 100%
-    );
+    background-image: var(--cool-gradient);
     -webkit-background-clip: text;
     color: transparent;
     font-weight: 500;
-    transition: filter 200ms ease-in-out;
+    transition: filter var(--transition-time) var(--transition-ease-in-out);
 
     &:hover,
     &:focus-visible {
-      filter: drop-shadow(0 0 4px hsl(235, 84%, 85%));
+      filter: drop-shadow(0 0 4px var(--brand-color));
     }
   }
 }
