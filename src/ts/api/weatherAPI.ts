@@ -3,7 +3,7 @@ import { DayWeatherForecast } from '../types/DayWeather';
 import { CityCoords } from '../types/CityCoords';
 
 const WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
-const GEOCODING_URL = 'http://api.openweathermap.org/geo/1.0';
+const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0';
 const API_KEY = '4280cd81abae27c19cf46d66e1fe9782';
 
 export async function getDayWeatherForecast({ lat, lon }: CityCoords) {
