@@ -1,0 +1,70 @@
+.weather-forecast {
+  padding: 40px 0;
+
+  & .weather-forecast__list {
+  }
+
+  & .weather-forecast__item {
+    & + & {
+      margin-top: 10px;
+    }
+  }
+}
+
+.weather-card {
+  width: 75%;
+  max-width: 320px;
+  margin: 0 auto;
+  background-color: var(--gray-color);
+  border-radius: 15px;
+  padding: 20px;
+
+  & .weather-card__city {
+    margin-bottom: 15px;
+  }
+
+  & .weather-card__info {
+    margin-bottom: 10px;
+  }
+}
+
+.current-weather {
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: var(--dark-gray-color);
+
+  & .weather-info__image {
+  }
+
+  & .weather-info__wrapper {
+  }
+
+  & .weather-info__title {
+    margin-bottom: 5px;
+  }
+
+  & .weather-info__text {
+    font-size: 0.8rem;
+  }
+}
+
+.weather-more-info {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  & .weather-more-info__item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  & .weather-more-info__icon {
+  }
+}
