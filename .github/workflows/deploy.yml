@@ -1,0 +1,50 @@
+name: Build and deploy vite app to GitHub Pages
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm ✨
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      
+      - name: Get pnpm store directory 🔃
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      
+      - uses: actions/cache@v3
+        name: Setup pnpm cache ⚙️
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      - name: Install and build 🛠️
+        run: |
+          pnpm install
+          pnpm build
+        
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: dist
