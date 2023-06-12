@@ -57,6 +57,7 @@ async function onSearchInput(evt: Event) {
   }, '');
 
   weeklyForecastList!.innerHTML = weatherListMarkup;
+
   createIcons({
     icons: {
       Navigation2,

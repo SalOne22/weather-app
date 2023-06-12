@@ -1,11 +1,6 @@
 import { DayWeatherForecast } from '../types/DayWeather';
 import { degreesToDirection, kelvinToCelsius } from '../utils/convert';
 
-const iconAttrs = {
-  width: '16',
-  height: '16',
-};
-
 export default function makeWeatherCardMarkup({
   weather,
   main,
