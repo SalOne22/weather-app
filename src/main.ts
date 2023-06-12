@@ -5,6 +5,7 @@ import {
   Droplets,
   Sunrise,
   Sunset,
+  Eye,
 } from 'lucide';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
@@ -15,8 +16,8 @@ import {
   weeklyForecastList,
   weeklyForecastSection,
 } from './ts/refs';
-import { getCities, getDayWeatherForecast } from './ts/api/weatherAPI';
-import makeWeatherCardMarkup from './ts/markup/weatherCard';
+import makeWeatherListMarkup from './ts/markup/weatherList';
+import { getCities, getWeatherInCities } from './ts/api/weatherAPI';
 
 import './css/styles.css';
 
@@ -26,7 +27,7 @@ function init() {
   searchEl!.addEventListener('input', debounce(onSearchInput, 500));
 }
 
-async function onSearchInput(evt: Event) {
+function onSearchInput(evt: Event) {
   const value = (<HTMLInputElement>evt.target)!.value.trim();
 
   if (value === '') {
@@ -34,7 +35,11 @@ async function onSearchInput(evt: Event) {
     return;
   }
 
-  const cities = await getCities(value);
+  updateWeatherListByQuery(value);
+}
+
+async function updateWeatherListByQuery(query: string) {
+  const cities = await getCities(query);
 
   notFoundSection!.classList.add('is-hidden');
   weeklyForecastSection!.classList.remove('is-hidden');
@@ -45,18 +50,15 @@ async function onSearchInput(evt: Event) {
     return;
   }
 
-  const citiesWeather = await Promise.all(cities.map(getDayWeatherForecast));
+  const citiesWeather = await getWeatherInCities(cities);
 
-  const weatherListMarkup = citiesWeather.reduce((markup, weatherData) => {
-    if (weatherData === null) {
-      Notify.failure('Failed to load city');
-      return markup;
-    }
+  const weatherListMarkup = makeWeatherListMarkup(citiesWeather);
 
-    return markup.concat(makeWeatherCardMarkup(weatherData));
-  }, '');
+  updateWeatherList(weatherListMarkup);
+}
 
-  weeklyForecastList!.innerHTML = weatherListMarkup;
+function updateWeatherList(markup: string) {
+  weeklyForecastList!.innerHTML = markup;
 
   createIcons({
     icons: {
@@ -65,6 +67,7 @@ async function onSearchInput(evt: Event) {
       Droplets,
       Sunrise,
       Sunset,
+      Eye,
     },
     attrs: {
       width: '16',

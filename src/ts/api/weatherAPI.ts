@@ -34,6 +34,10 @@ export async function getCities(query: string, limit: number = 5) {
   }
 }
 
+export async function getWeatherInCities(cities: CityCoords[]) {
+  return await Promise.all(cities.map(getDayWeatherForecast));
+}
+
 function onError(err: unknown) {
   if (axios.isAxiosError(err))
     console.error('Failed to load weather: ' + err.message);
