@@ -6,13 +6,13 @@ const WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
 const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0';
 const API_KEY = '4280cd81abae27c19cf46d66e1fe9782';
 
-export async function getDayWeatherForecast({ lat, lon }: CityCoords) {
+export async function getDayWeatherForecast({ lat, lon, name }: CityCoords) {
   try {
     const response = await axios.get<DayWeatherForecast>(
       `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`,
     );
 
-    return response.data;
+    return { ...response.data, name };
   } catch (err) {
     onError(err);
 
