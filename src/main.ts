@@ -8,7 +8,6 @@ import {
   Eye,
 } from 'lucide';
 import debounce from 'lodash.debounce';
-import { Notify } from 'notiflix';
 
 import {
   notFoundSection,
@@ -20,6 +19,7 @@ import makeWeatherListMarkup from './ts/markup/weatherList';
 import { getCities, getWeatherInCities } from './ts/api/weatherAPI';
 
 import './css/styles.css';
+import updateLocationParams from './ts/utils/updateLocationParams';
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -31,11 +31,19 @@ function onSearchInput(evt: Event) {
   const value = (<HTMLInputElement>evt.target)!.value.trim();
 
   if (value === '') {
-    Notify.info('Please enter a city name');
+    notFoundSection!.classList.add('is-hidden');
+    weeklyForecastSection!.classList.add('is-hidden');
+    updateLocationParams();
     return;
   }
 
   updateWeatherListByQuery(value);
+
+  updateLocationParams(
+    new URLSearchParams({
+      query: value,
+    }),
+  );
 }
 
 async function updateWeatherListByQuery(query: string) {
