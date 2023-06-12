@@ -5,6 +5,9 @@ import FullReload from 'vite-plugin-full-reload';
 
 export default defineConfig({
   root: 'src',
+  build: {
+    outDir: '../dist',
+  },
   plugins: [injectHTML(), FullReload(['src/**/*.html'])],
   css: {
     postcss: { plugins: [postcssNesting()] },
