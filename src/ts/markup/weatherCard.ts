@@ -8,6 +8,7 @@ export default function makeWeatherCardMarkup({
   wind,
   sys,
   name,
+  timezone,
   id,
 }: DayWeatherForecast) {
   const weatherItem = weather[0];
@@ -17,8 +18,8 @@ export default function makeWeatherCardMarkup({
 
   const windDirection = degreesToDirection(wind.deg);
 
-  const sunriseTime = new Date(sys.sunrise * 1000);
-  const sunsetTime = new Date(sys.sunset * 1000);
+  const sunriseTime = new Date((sys.sunrise + timezone) * 1000);
+  const sunsetTime = new Date((sys.sunset + timezone) * 1000);
 
   const visibilityDistance = (visibility / 1000).toFixed(1);
 
