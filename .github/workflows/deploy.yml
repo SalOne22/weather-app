@@ -1,11 +1,16 @@
 name: Build and deploy vite app to GitHub Pages
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  install:
+  build:
+    name: Build 🛠️ 
     runs-on: ubuntu-latest
     
     steps:
@@ -43,8 +48,27 @@ jobs:
           pnpm install
           pnpm build
         
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+      - name: Upload production-ready build files 💾
+        uses: actions/upload-artifact@v3
         with:
-          branch: gh-pages
-          folder: dist
+          name: production-files
+          path: ./dist
+
+  deploy:
+    name: Deploy 🚀
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact 🔃
+        uses: actions/download-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
