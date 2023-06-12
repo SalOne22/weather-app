@@ -17,6 +17,9 @@
     "vite-plugin-html-inject": "^1.0.1"
   },
   "dependencies": {
-    "modern-normalize": "^2.0.0"
+    "axios": "^1.4.0",
+    "lucide": "^0.242.0",
+    "modern-normalize": "^2.0.0",
+    "notiflix": "^3.2.6"
   }
 }
