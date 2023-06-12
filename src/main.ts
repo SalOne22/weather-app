@@ -25,14 +25,29 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   searchEl!.addEventListener('input', debounce(onSearchInput, 500));
+  window.addEventListener('popstate', updateWeatherListByLocation);
+
+  updateWeatherListByLocation();
+}
+
+function updateWeatherListByLocation() {
+  if (location.search === '') {
+    hideSearch();
+    return;
+  }
+
+  const params = new URLSearchParams(location.search);
+  const query = params.get('query') ?? '';
+  searchEl!.value = query;
+
+  if (query) updateWeatherListByQuery(query);
 }
 
 function onSearchInput(evt: Event) {
   const value = (<HTMLInputElement>evt.target)!.value.trim();
 
   if (value === '') {
-    notFoundSection!.classList.add('is-hidden');
-    weeklyForecastSection!.classList.add('is-hidden');
+    hideSearch();
     updateLocationParams();
     return;
   }
@@ -82,4 +97,10 @@ function updateWeatherList(markup: string) {
       height: '16',
     },
   });
+}
+
+function hideSearch() {
+  notFoundSection!.classList.add('is-hidden');
+  weeklyForecastSection!.classList.add('is-hidden');
+  searchEl!.value = '';
 }

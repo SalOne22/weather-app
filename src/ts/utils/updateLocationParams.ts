@@ -4,6 +4,7 @@ export default function updateLocationParams(
   const url = new URL(window.location.href);
 
   url.search = params.toString();
+  const urlString = url.toString();
 
-  window.history.pushState({ path: url.toString() }, '', url.toString());
+  window.history.replaceState(urlString, '', urlString);
 }
