@@ -48,6 +48,7 @@ export default function makeWeatherCardMarkup({
     <ul class="weather-more-info weather-card__more-info">
       <li class="weather-more-info__item">
         <i
+          style="transform: rotate(${wind.deg - 180}deg)"
           class="weather-more-info__icon"
           data-lucide="navigation-2"
         ></i>

@@ -23,20 +23,6 @@ import './css/styles.css';
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
-  createIcons({
-    icons: {
-      Navigation2,
-      Gauge,
-      Droplets,
-      Sunrise,
-      Sunset,
-    },
-    attrs: {
-      width: '16',
-      height: '16',
-    },
-  });
-
   searchEl!.addEventListener('input', debounce(onSearchInput, 500));
 }
 
@@ -71,4 +57,17 @@ async function onSearchInput(evt: Event) {
   }, '');
 
   weeklyForecastList!.innerHTML = weatherListMarkup;
+  createIcons({
+    icons: {
+      Navigation2,
+      Gauge,
+      Droplets,
+      Sunrise,
+      Sunset,
+    },
+    attrs: {
+      width: '16',
+      height: '16',
+    },
+  });
 }
