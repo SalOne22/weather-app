@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "eslint": "^8.43.0",
@@ -20,7 +21,6 @@
     "vite-plugin-html-inject": "^1.0.1"
   },
   "dependencies": {
-    "@types/lodash.debounce": "^4.0.7",
     "axios": "^1.4.0",
     "lodash.debounce": "^4.0.8",
     "lucide": "^0.242.0",
