@@ -20,7 +20,7 @@ export async function getDayWeatherForecast({ lat, lon, name }: CityCoords) {
   }
 }
 
-export async function getCities(query: string, limit: number = 5) {
+export async function getCities(query: string, limit = 5) {
   try {
     const response = await axios.get<CityCoords[]>(
       `${GEOCODING_URL}/direct?q=${query}&limit=${limit}&appid=${API_KEY}`,

@@ -1,6 +1,6 @@
 export interface CityCoords {
   name: string;
-  local_names: Object[];
+  local_names: object[];
   lat: number;
   lon: number;
   country: string;
