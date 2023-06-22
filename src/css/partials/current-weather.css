@@ -1,0 +1,58 @@
+.current-weather {
+  padding: 40px 0;
+}
+
+.current-weather__wrapper {
+  background-color: var(--gray-color);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+@media screen and (min-width: 768px) {
+  .current-weather__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.current-weather__city {
+  margin-bottom: 24px;
+}
+
+.current-weather__today {
+  flex-basis: 30%;
+}
+
+@media screen and (max-width: 767px) {
+  .current-weather__today {
+    margin-bottom: 15px;
+  }
+}
+
+.current-weather__today .weather-info {
+  margin-bottom: 15px;
+}
+
+.current-weather__today .weather-more-info {
+  flex-direction: column;
+}
+
+.current-weather__time {
+  margin-bottom: 10px;
+}
+
+.daily-forecast {
+  flex-basis: 60%;
+}
+
+.daily-forecast__item + .daily-forecast__item {
+  margin-top: 15px;
+}
+
+.daily-forecast__time {
+  margin-bottom: 10px;
+}
+
+.daily-forecast__item .weather-info {
+  margin-bottom: 10px;
+}
