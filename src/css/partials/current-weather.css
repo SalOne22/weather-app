@@ -29,6 +29,14 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  .current-weather__today {
+    position: sticky;
+    top: 15px;
+    height: fit-content;
+  }
+}
+
 .current-weather__today .weather-info {
   margin-bottom: 15px;
 }
