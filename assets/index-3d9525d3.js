@@ -11,7 +11,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
   <div class="weather-info weather-card__info">
     <img
       class="weather-info__image"
-      src="http://openweathermap.org/img/wn/${x.icon}@2x.png"
+      src="https://openweathermap.org/img/wn/${x.icon}@2x.png"
       width="50"
       height="50"
       alt="${x.description} icon"
@@ -60,7 +60,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
       <div class="weather-info">
         <img
           class="weather-info__image"
-          src="http://openweathermap.org/img/wn/${x.icon}@2x.png"
+          src="https://openweathermap.org/img/wn/${x.icon}@2x.png"
           width="50"
           height="50"
           alt="${x.description} icon"
@@ -107,7 +107,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
         <div class="weather-info">
           <img
             class="weather-info__image"
-            src="http://openweathermap.org/img/wn/${ut.icon}@2x.png"
+            src="https://openweathermap.org/img/wn/${ut.icon}@2x.png"
             width="50"
             height="50"
             alt="${ut.description} icon"
