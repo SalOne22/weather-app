@@ -27,7 +27,7 @@ export function makeCurrentWeatherMarkup(
       <div class="weather-info">
         <img
           class="weather-info__image"
-          src="http://openweathermap.org/img/wn/${weatherItem.icon}@2x.png"
+          src="https://openweathermap.org/img/wn/${weatherItem.icon}@2x.png"
           width="50"
           height="50"
           alt="${weatherItem.description} icon"
@@ -91,7 +91,7 @@ export function makeCurrentWeatherMarkup(
         <div class="weather-info">
           <img
             class="weather-info__image"
-            src="http://openweathermap.org/img/wn/${weatherItem.icon}@2x.png"
+            src="https://openweathermap.org/img/wn/${weatherItem.icon}@2x.png"
             width="50"
             height="50"
             alt="${weatherItem.description} icon"
