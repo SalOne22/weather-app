@@ -11,16 +11,24 @@ import {
 import debounce from 'lodash.debounce';
 
 import {
+  currentWeatherSection,
   notFoundSection,
   searchEl,
   weeklyForecastList,
   weeklyForecastSection,
 } from './ts/refs';
 import makeWeatherListMarkup from './ts/markup/weatherList';
-import { getCities, getWeatherInCities } from './ts/api/weatherAPI';
+import {
+  get5DaysWeatherForecast,
+  getCities,
+  getCitiesByCoords,
+  getDayWeatherForecast,
+  getWeatherInCities,
+} from './ts/api/weatherAPI';
 
 import './css/styles.css';
 import updateLocationParams from './ts/utils/updateLocationParams';
+import { makeCurrentWeatherMarkup } from './ts/markup/currentWeather';
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -33,6 +41,7 @@ function init() {
 
 function updateWeatherListByLocation() {
   if (location.search === '') {
+    updateCurrentWeatherByGeolocation();
     hideSearch();
     return;
   }
@@ -46,6 +55,7 @@ function updateWeatherListByLocation() {
 
 function onSearchInput(evt: Event) {
   const value = (<HTMLInputElement>evt.target)!.value.trim();
+  hideCurrentWeather();
 
   if (value === '') {
     hideSearch();
@@ -100,8 +110,40 @@ function updateWeatherList(markup: string) {
   });
 }
 
+function updateCurrentWeatherByGeolocation() {
+  navigator.geolocation.getCurrentPosition(
+    updateCurrentWeather,
+    hideCurrentWeather,
+  );
+}
+
+async function updateCurrentWeather(position: GeolocationPosition) {
+  const cities = await getCitiesByCoords(
+    position.coords.latitude,
+    position.coords.longitude,
+  );
+
+  if (cities.length === 0) return;
+
+  const [weather, weatherForecast] = await Promise.all([
+    getDayWeatherForecast(cities[0]),
+    get5DaysWeatherForecast(cities[0]),
+  ]);
+
+  if (weather === null || weatherForecast === null) return;
+
+  const markup = makeCurrentWeatherMarkup(weather, weatherForecast);
+
+  currentWeatherSection!.querySelector('.container')!.innerHTML = markup;
+}
+
 function hideSearch() {
   notFoundSection!.classList.add('is-hidden');
   weeklyForecastSection!.classList.add('is-hidden');
+  currentWeatherSection!.classList.remove('is-hidden');
   searchEl!.value = '';
+}
+
+function hideCurrentWeather() {
+  currentWeatherSection!.classList.add('is-hidden');
 }

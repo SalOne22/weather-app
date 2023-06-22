@@ -1,6 +1,8 @@
 export const searchEl = <HTMLInputElement | null>(
   document.getElementById('search')
 );
+export const currentWeatherSection = document.getElementById('current-weather');
+
 export const notFoundSection = document.querySelector('.not-found');
 
 export const weeklyForecastSection =
