@@ -135,6 +135,21 @@ async function updateCurrentWeather(position: GeolocationPosition) {
   const markup = makeCurrentWeatherMarkup(weather, weatherForecast);
 
   currentWeatherSection!.querySelector('.container')!.innerHTML = markup;
+
+  createIcons({
+    icons: {
+      Navigation2,
+      Gauge,
+      Droplets,
+      Sunrise,
+      Sunset,
+      Eye,
+    },
+    attrs: {
+      width: '16',
+      height: '16',
+    },
+  });
 }
 
 function hideSearch() {
